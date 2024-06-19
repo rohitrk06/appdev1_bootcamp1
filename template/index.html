@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Home - Grocery Store {% endblock title %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href={{ url_for('login')}}>Login</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href={{ url_for('register') }}>Register</a>
+</li>
+{% endblock nav_items %}
+
+{% block search %}
+{% endblock search %}
+
+{% block main_content %}
+<div class="container-fluid mt-5 p-5">
+    <h1 class="text-center">Welcome to Grocery Store</h1>
+    <p class="text-center">Buy groceries online from the comfort of your home.</p>
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-primary justify-content-center">Shop Now</button>
+    </div>
+    
+</div>
+{% endblock main_content %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} Register - Grocery Store {% endblock title %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href="#">Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="#">Login</a>
+</li>
+{% endblock nav_items %}
+
+{% block search %}
+{% endblock search %}
+
+{% block main_content %}
+
+<div class="container-fluid mt-2 p-3">
+    <h1 class="text-center">Register</h1>
+    <div class="d-flex justify-content-center">
+        <form class="w-50 justify-content-center" method="POST" action="/register">
+            <div class="mb-3">
+                <label for="username" class="form-label"><strong>Username</strong></label>
+                <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" name="username" required>
+                <div id="usernameHelp" class="form-text">Username Should be alphanumeric and should contain atleast 3 characters.</div>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label"><strong>Email Address</strong></label>
+              <input type="email" class="form-control" id="email" name="email" required >
+            </div>
+            <div class="row">
+              <div class="mb-3 col-6">
+                  <label for="exampleInputPassword1" class="form-label"><strong>Password</strong></label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" name = 'password' required>
+              </div>
+              <div class="mb-3 col-6">
+                  <label for="exampleInputPassword2" class="form-label"><strong>Confirm Password</strong> </label>
+                  <input type="password" class="form-control" id="exampleInputPassword2" name = 'confirm_password' required>
+              </div>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label"><strong>Address</strong></label>
+                <textarea type="" class="form-control" id="address" name="address"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label"><strong>Role</strong></label>
+                <div class="input-group d-flex align-center">
+                  <input type="radio" id="storemanager" name="role" value="store_manager" required>&ensp;
+                  <label for="storemanager"> Store Manager </label>&ensp; &ensp;
+                  <input type="radio" id="customer" name="role" value="customer" required>&ensp;
+                  <label for="customer">Customer</label>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+            <div class="d-flex justify-content-center mt-2">
+                <span>Alreay an existing user? &ensp; </span>
+                <a href="#">Login</a>
+            </div>
+        </form>
+    </div>  
+</div>
+{% endblock main_content %}
