@@ -21,7 +21,12 @@
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand h1 m-0" href="#">Grocery Store</a>
-
+            {% block search %}
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            {% endblock search %}
             <ul class="nav justify-content-end ">
                 {% block nav_items %}
                 <li class="nav-item">
@@ -30,12 +35,7 @@
                 {% endblock nav_items %}
             </ul>
 
-            {% block search %}
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            {% endblock search %}
+            
         </div>
     </nav>
 

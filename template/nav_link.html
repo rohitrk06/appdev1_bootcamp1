@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block nav_items %}
+
+    {% if session['username'] %}
+        {% if session['role'] == 'admin' %}
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('index') }}>Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('add_category') }}>Add Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href='#'>Summary</a>
+            </li>   
+        {% elif session['role'] == 'store_manager' %}
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('index') }}>Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ url_for('add_category')}}>Add Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{url_for('add_product')}}>Add Products</a>
+            </li>   
+            <li class="nav-item">
+                <a class="nav-link" href='#'>Requests</a>
+            </li>
+        {% else %}
+z
+        {% endif %}
+        <li class="nav-item">
+            <a class="nav-link" href={{ url_for('logout') }}>Logout</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" >{{ session['username']}}</a>
+        </li>
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link" href={{ url_for('login')}}>Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href={{ url_for('register') }}>Register</a>
+    </li>
+    {% endif %}
+
+
+{% endblock nav_items %}

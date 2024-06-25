@@ -3,6 +3,7 @@ from flask import render_template, request, redirect, url_for, flash ,session
 from application.database import db
 from application.models import User, Role
 
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -28,10 +29,18 @@ def login():
         
         session['username'] = user.username
         session['email'] = user.email
+        session['role'] = user.roles[0].name
 
         flash("Login Successful", 'success')
         return redirect(url_for('index'))
 
+@app.route("/logout")
+def logout():
+    session.pop('username',None)
+    session.pop('email',None)
+    session.pop('role',None)
+    flash("Logged out successfully", 'success')
+    return redirect(url_for('index'))
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():

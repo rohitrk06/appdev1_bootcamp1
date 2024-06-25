@@ -67,7 +67,7 @@ class Cart(db.Model):
 class Requests(db.Model):
     request_id = db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(30),db.ForeignKey('user.username'))
-    category_id = db.Column(db.Integer,db.ForeignKey('categories.category_id'))
+    category_id = db.Column(db.Integer,db.ForeignKey('categories.category_id'), nullable= True)
     request_type = db.Column(db.String(20),nullable=False)
     request_date = db.Column(db.Date,nullable=False)
     status = db.Column(db.String(20),nullable=False)

@@ -1,0 +1,58 @@
+{% extends 'nav_link.html' %}
+
+{% block title %} Add Product - Grocery Store {% endblock title %}
+
+{% block main_content %}
+<div class="container-fluid mt-2 p-3">
+    <h1 class="text-center">Add Product</h1>
+    <div class="d-flex justify-content-center">
+        <form class="w-50 justify-content-center" method="POST" action="/add_product">
+            <div class="mb-3">
+                <label for="product_name" class="form-label"><strong>Product Name</strong></label>
+                <input type="text" class="form-control" id="product_name" name = product_name>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label"><strong>Product Description</strong></label>
+                <textarea class="form-control" id="description" name = description></textarea>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label for="cost_price" class="form-label"><strong>Cost Price</strong></label>
+                    <input type="number" class="form-control" id="cost_price" name = 'cost_price' required>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="selling_price" class="form-label"><strong>Selling Price</strong> </label>
+                    <input type="number" class="form-control" id="selling_price" name = 'selling_price'>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" name = category>
+                    <option selected>Choose...</option>
+                    {% for category in categories %}
+                    <option value="{{ category.category_id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-4">
+                    <label for="manufacturing_date" class="form-label"><strong>Manufacture Date</strong></label>
+                    <input type="date" class="form-control" id="manufacturing_date" name = 'mfg_date' required>
+                </div>
+                <div class="mb-3 col-4">
+                    <label for="expiry_date" class="form-label"><strong>Expiry Date</strong> </label>
+                    <input type="date" class="form-control" id="expiry_date" name = 'expiry_date'>
+                </div>
+                <div class="mb-3 col-4">
+                    <label for="stock" class="form-label"><strong>Available Stock</strong></label>
+                    <input type="number" class="form-control" id="stock" name = stock required> 
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form> 
+    </div>
+</div>
+
+{% endblock main_content %}
