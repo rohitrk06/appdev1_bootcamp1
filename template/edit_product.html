@@ -1,0 +1,62 @@
+{% extends 'nav_link.html' %}
+
+{% block title %} Add Product - Grocery Store {% endblock title %}
+
+{% block main_content %}
+<div class="container-fluid mt-2 p-3">
+    <h1 class="text-center">Edit Product Details</h1>
+    <div class="d-flex justify-content-center">
+        <form class="w-50 justify-content-center" method="POST" action="{{ '/edit_product/'+ product.product_id|string }}">
+            <div class="mb-3">
+                <label for="product_name" class="form-label"><strong>Product Name</strong></label>
+                <input type="text" class="form-control" id="product_name" name = product_name value={{product.name}}>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label"><strong>Product Description</strong></label>
+                <textarea class="form-control" id="description" name = description  placeholder ={{ product.description }} ></textarea>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label for="cost_price" class="form-label"><strong>Cost Price</strong></label>
+                    <input type="number" class="form-control" id="cost_price" name = 'cost_price' value={{ product.cost_price}} required>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="selling_price" class="form-label"><strong>Selling Price</strong> </label>
+                    <input type="number" class="form-control" id="selling_price" name = 'selling_price' value = {{ product.selling_price }}>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" name = category>
+                    <option>Choose...</option>
+                    {% for category in categories %}
+                    {% if category.category_id == product.category_id %}
+                    <option value="{{ category.category_id }}" selected >{{ category.name }}</option>
+                    {% else %}
+                    <option value="{{ category.category_id }}">{{ category.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-4">
+                    <label for="manufacturing_date" class="form-label"><strong>Manufacture Date</strong></label>
+                    <input type="date" class="form-control" id="manufacturing_date" name = 'mfg_date' value={{product.manufacture_date}} required>
+                </div>
+                <div class="mb-3 col-4">
+                    <label for="expiry_date" class="form-label"><strong>Expiry Date</strong> </label>
+                    <input type="date" class="form-control" id="expiry_date" name = 'expiry_date' value = {{product.expiry_date}}>
+                </div>
+                <div class="mb-3 col-4">
+                    <label for="stock" class="form-label"><strong>Available Stock</strong></label>
+                    <input type="number" class="form-control" id="stock" name = stock  value={{product.stock}} required> 
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <button type="submit" class="btn btn-primary">Edit Product</button>
+            </div>
+        </form> 
+    </div>
+</div>
+
+{% endblock main_content %}

@@ -8,12 +8,89 @@
 {% endblock search %}
 
 {% block main_content %}
+{% if session['username'] %}
+<div class = "container-fluid mt-5">
+    {% for category in categories %}
+    <div class="container-fluid mt-5"> 
+        <div class="row">
+            <div class="col-9 ">
+                <h3 class="">{{category.name}}</h3>
+                <p class="">{{category.description}}</p>
+            </div>
+            {% if (session['role']=='store_manager') or (session['role'] == 'admin') %}
+            <div class="col-3">
+                <a href={{ url_for('edit_category', category_id=category.category_id )}} class="btn btn-primary">Edit Category</a>
+                <a href={{url_for('delete_category',category_id=category.category_id)}} class="btn btn-primary">Delete Category</a>
+            </div>  
+            {% endif %}
+        </div>
+        <div class="row container-fluid justify-content-start">
+        {% for product in category.products %}
+        <div class="card col-3 m-1">
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5>
+              <p class="card-text"><em>{{product.description}}</em></p>
+              <div class="row">
+                <div class="col-6">
+                    <p class="card-text"><strong>Mfg Date:</strong> {{product.manufacture_date}}</p>
+                </div>
+                <div class="col-6">
+                    <p class="card-text"><strong>Expriy Date:</strong> {{product.expiry_date}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                    <p class="card-text mt-4"><strong>Price:</strong> {{product.selling_price}}</p>
+                </div>
+              </div>
+                {% if session['username']=='store_manager' %}
+                <div class="row mt-3 container-fluid justify-content-center">
+                    <div class="col-6">
+                        <a href={{ url_for('edit_product',product_id = product.product_id) }} class="btn btn-primary">Update</a>
+                    </div>
+                    <div class="col-6">
+                        <a href={{ url_for('delete_product',product_id = product.product_id )}} class="btn btn-primary">Delete</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% if session['role']=='customer' %}
+                <div class="contain-fluid mt-3">
+                    <form method="POST" action={{'/add_to_cart/'+product.product_id | string}}>
+                        <div class="row d-flex justify-content-center">
+                        <div class="col-6">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" name="quantity" class="form-control" placeholder="Quantity">
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <!-- <div class="row mt-2">
+                    <div class="col-6 ">
+                        <a href='#' class="btn btn-primary">Add to Cart</a>
+                    </div>
+                    <div class="col-6">
+                        <a href='#' class="btn btn-primary">Buy</a>
+                    </div>
+                </div> -->
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        <hr class="mt-4">
+        </div>
+    </div>  
+    {%endfor%}
+</div>  
+{% else %}
 <div class="container-fluid mt-5 p-5">
     <h1 class="text-center">Welcome to Grocery Store</h1>
     <p class="text-center">Buy groceries online from the comfort of your home.</p>
     <div class="d-flex justify-content-center">
-        <button class="btn btn-primary justify-content-center">Shop Now</button>
-    </div>
-    
+        <a class="btn btn-primary justify-content-center" href={{ url_for('login') }} >Shop Now</a>
+    </div>  
 </div>
+{% endif %}
 {% endblock main_content %}

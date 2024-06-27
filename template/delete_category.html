@@ -1,0 +1,17 @@
+{% extends 'nav_link.html' %}
+
+{% block title %} Delete Category - Grocery Store {% endblock title %}
+
+{% block main_content %}
+<div class="container-fluid justify-content-center mt-2 p-3">
+    <h1 class="text-center">Delete Category</h1>
+    <div class=" container-fluid">
+        <p>Are you sure you want to delete the Category? {{category.name}}</p>
+        <form class="w-50 justify-content-center" method="POST" action="{{ '/delete_category/'+ category.category_id|string }}">
+            <div class="d-flex justify-content-center mb-3">
+                <button type="submit" class="btn btn-primary">Delete Category</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock main_content %}

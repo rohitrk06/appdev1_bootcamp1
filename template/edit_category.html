@@ -1,0 +1,25 @@
+{% extends 'nav_link.html' %}
+
+{% block title %} Edit Category - Grocery Store {% endblock title %}
+
+
+{% block main_content %}
+<div class="container-fluid mt-2 p-3">
+    <h1 class="text-center">Edit Category</h1>
+    <div class="d-flex justify-content-center">
+        <form class="w-50 justify-content-center" method="POST" action={{"/edit_category/" + category.category_id | string }}>
+            <div class="mb-3">
+                <label for="category_name" class="form-label">Category Name</label>
+                <input type="test" class="form-control" id="category_name" name = category_name value={{ category.name }}>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name = 'description' placeholder={{ category.description }}></textarea>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+        </form>
+    </div>  
+</div>
+{% endblock main_content %}
